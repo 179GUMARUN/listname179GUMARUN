@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>179 & GMR — Showcase</title>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#0b0c10;
+      --card:#1f2833;
+      --accent:#ffffff;
+      --text:#c5c6c7;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body {
+      font-family:'Prompt',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+    header {
+      position:sticky;top:0;
+      background:#0b0c10d9;
+      backdrop-filter:blur(10px);
+      padding:16px 32px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      z-index:10;
+    }
+    header .logo {font-weight:600;font-size:20px;color:var(--accent)}
+    nav a {margin-left:20px;color:var(--text);text-decoration:none;font-size:15px;transition:color .3s}
+    nav a:hover {color:var(--accent)}
+
+    main {flex:1;display:flex;flex-direction:column;align-items:center;padding:40px 20px;gap:40px}
+
+      .hero {
+  background: url('https://i.postimg.cc/hGD2sp7K/image.png') center/cover no-repeat;
+  border-radius:32px;
+  color:#fff;
+  text-shadow: 0 0 8px #000;
+}
+
+    .hero {max-width:900px;text-align:center;padding:40px 20px}
+    .hero h1 {font-size:36px;color:var(--accent);margin-bottom:12px}
+    .hero p {font-size:18px;line-height:1.6;color:var(--text)}
+
+    .card {background:var(--card);border-radius:16px;padding:28px;max-width:1000px;width:100%;box-shadow:0 6px 20px rgba(0,0,0,0.4)}
+    .card h2 {color:var(--accent);margin-bottom:12px;font-size:24px}
+    .card p.subtitle {font-size:14px;color:#999;margin-bottom:20px}
+
+    .members {display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+    .member {background:#0f1720;border-radius:12px;overflow:hidden;transition:transform .3s, box-shadow .3s}
+    .member:hover {transform:translateY(-5px);box-shadow:0 8px 20px rgba(0,0,0,0.6)}
+    .member img {width:100%;height:160px;object-fit:cover}
+    .member h3 {margin:12px;font-size:18px;color:#fff}
+    .member .subtitle {margin:0 12px 12px;color:#aaa;font-size:14px}
+    .member a.fb-icon {margin-left:12px;color:var(--accent);font-size:16px;text-decoration:none;}
+    .member a.fb-icon:hover {color:#3b5998;}
+
+    .controls {margin-top:20px;display:flex;justify-content:space-between;align-items:center}
+    .btn {background:var(--accent);border:none;color:#0b0c10;padding:10px 18px;border-radius:8px;cursor:pointer;font-weight:600;transition:background .3s}
+    .btn:hover {background:#ffffff}
+
+    #searchMember {width:100%;padding:10px;border-radius:8px;border:1px solid #333;margin-bottom:20px;font-size:14px;color:#0b0c10;}
+
+    footer {background:#0b0c10;padding:20px 30px;text-align:center;font-size:14px;color:#777;border-top:1px solid rgba(255,255,255,0.05)}
+
+    audio{display:none}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">179 & GMR</div>
+    <nav>
+      <a href="#about">เกี่ยวกับ</a>
+      <a href="#members">สมาชิก</a>
+      <a href="#contact">ติดต่อ</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1></h1>
+      <p></p>
+    </section>
+
+    <section id="members" class="card">
+      <h2>Member</h2>
+      <p class="subtitle">ถ้าไม่มีรายชื่อปลอมทั้งหมด</p>
+
+      <!-- Search input -->
+      <input type="text" id="searchMember" placeholder="ค้นหาชื่อสมาชิก...">
+
+      <div id="memberWrap" class="members"></div>
+      <div class="controls">
+        <button id="prev" class="btn">ก่อนหน้า</button>
+        <button id="next" class="btn">ถัดไป</button>
+        <button id="toggleMusic" class="btn">▶ เล่นเพลง</button>
+      </div>
+    </section>
+
+    <section id="about" class="card">
+      <h2>เกี่ยวกับเรา</h2>
+      <p class="subtitle">179 & GUMARUN 2024-2025</p>
+    </section>
+
+    <section id="contact" class="card">
+      <h2>ติดต่อ</h2>
+      <p class="subtitle">Instagram: <a href="#" style="color:var(--accent)">
+        @_zxe.bangbon3, @sura.guy09, @n.o2936
+      </a></p>
+      <p class="subtitle">Pags: 179 Community</p>
+    </section>
+  </main>
+
+  <footer>
+    Designed by 179 & GMR © 2025 | สงวนลิขสิทธิ์
+  </footer>
+
+  <audio id="bgAudio" loop src="https://cdn.pixabay.com/download/audio/2021/10/04/audio_5b8a3b5b1a.mp3?filename=calm-ambient-110117.mp3"></audio>
+
+  <script>
+    const members = [
+      {
+        name:'Bungjack Gumarun', 
+        role:'Founder', 
+        img:'https://i.postimg.cc/1RY9PF3Z/482010978-517799924738250-5608356900494938275-n.png',
+        fb:'https://www.facebook.com/bang.c.kh.ku.ma.ran'
+      },
+      {
+        name:'Mind Gumarun', 
+        role:'Founder', 
+        img:'https://i.postimg.cc/Bb8tsBWZ/476345984-546276861798001-2605718371620205500-n.png',
+        fb:'https://www.facebook.com/anakin.Rhnk'
+      },
+      {
+        name:'Kapo Gumarun', 
+        role:'Leader', 
+        img:'https://i.postimg.cc/gcgmHTXr/481893759-122271886346001818-7950197713354393065-n.png',
+        fb:'https://www.facebook.com/kapo.gumarun'
+      },
+       {
+        name:'Nayx Gumarun', 
+        role:'Leader', 
+        img:'https://i.postimg.cc/gj5GGx88/468977811-122188227656241663-5795268461173550526-n.png',
+        fb:'https://www.facebook.com/profile.php?id=61557249911802'
+      }, 
+      {
+        name:'Witta Gumarun', 
+        role:'Head', 
+        img:'https://i.postimg.cc/k4dKw5Hf/483918166-122202900782188960-1045919471961663067-n.png',
+        fb:'https://www.facebook.com/profile.php?id=61555668812380'
+      },      
+       {
+        name:'Hades Gumarun', 
+        role:'Member', 
+        img:'https://i.postimg.cc/j5cz3bPz/440383557-122102417222310243-6728030251805127040-n.png',
+        fb:'https://www.facebook.com/profile.php?id=61559307307616'
+      }           
+    ];
+
+    const wrap = document.getElementById('memberWrap');
+    let page = 0; const perPage = 3;
+    let filteredMembers = [...members];
+
+    function render(){
+      wrap.innerHTML = '';
+      const start = page * perPage;
+      const slice = filteredMembers.slice(start, start + perPage);
+      if(slice.length === 0){ page = 0; return render(); }
+      slice.forEach(m=>{
+        const el = document.createElement('div');
+        el.className='member';
+        el.innerHTML = `
+          <img src="${m.img}" alt="${m.name}">
+          <h3>${m.name}</h3>
+          <div class="subtitle">${m.role}</div>
+          ${m.fb ? `<a href="${m.fb}" target="_blank" class="fb-icon">📘 Facebook</a>` : ''}
+        `;
+        wrap.appendChild(el);
+      });
+    }
+
+    
+
+    document.getElementById('prev').addEventListener('click', ()=>{ page = Math.max(0, page-1); render(); });
+    document.getElementById('next').addEventListener('click', ()=>{ if((page+1)*perPage < filteredMembers.length) page++; else page=0; render(); });
+
+    document.getElementById('searchMember').addEventListener('input', (e)=>{
+      const keyword = e.target.value.toLowerCase();
+      filteredMembers = members.filter(m => m.name.toLowerCase().includes(keyword));
+      page = 0;
+      render();
+    });
+
+    const audio = document.getElementById('bgAudio');
+    const btn = document.getElementById('toggleMusic');
+    let playing = false;
+    btn.addEventListener('click', ()=>{
+      if(!playing){ audio.play().catch(()=>{}); btn.textContent='⏸ หยุดเพลง'; playing=true; }
+      else{ audio.pause(); btn.textContent='▶ เล่นเพลง'; playing=false; }
+    });
+
+    setInterval(()=>{ document.getElementById('next').click(); }, 6000);
+    render();
+  </script>
+</body>
+</html>
