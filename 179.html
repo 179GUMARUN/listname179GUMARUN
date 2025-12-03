@@ -1,232 +1,280 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>179 & GMR</title>
-<link rel="shortcut icon" href="https://i.postimg.cc/YCcD95MB/image.png" type="image/png">
-<link rel="icon" href="https://i.postimg.cc/YCcD95MB/image.png" type="image/png">
-<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<title>179 List Name</title>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
+
 <style>
-:root {
-  --bg:#0b0a0a; 
-  --card:#1a1714; 
-  --accent:#d4af37;
-  --text:#f0e6c8; 
-  --danger:#e74c3c;
-  --btnHover:#ffdd6b;
+:root{
+    --bg:#3b3b3b;
+    --header:#4b4b4b;
+    --card:#4c4c4c;
+    --accent:#ffffff;   /* ← เปลี่ยนเป็นสีขาว */
+    --text:#ffffff;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Prompt',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;transition:background 0.3s;}
-header{position:sticky;top:0;background:rgba(11,10,10,0.9);backdrop-filter:blur(14px);padding:16px 32px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(212,175,55,0.3);z-index:10;}
-header .logo{display:flex;align-items:center;gap:14px;font-weight:700;font-size:22px;color:var(--accent)}
-header .logo img{width:45px;height:45px;object-fit:contain;}
-nav a{margin-left:22px;color:var(--text);text-decoration:none;font-size:16px;font-weight:500;transition:all .3s}
-nav a:hover{color:var(--accent);transform:scale(1.05);}
-main{flex:1;display:flex;flex-direction:column;align-items:center;padding:50px 20px;gap:50px}
-.hero{max-width:950px;text-align:center;padding:60px 30px;border-radius:24px;background:linear-gradient(145deg,#120f0d,#1f1a17);box-shadow:0 0 60px rgba(212,175,55,0.25);transition:transform 0.3s, box-shadow 0.3s;}
-.hero:hover{transform:scale(1.03);box-shadow:0 0 80px rgba(212,175,55,0.35);}
-.hero img{width:130px;height:130px;object-fit:contain;margin-bottom:20px;animation:pulse 2s infinite;}
-.hero h1{font-size:42px;color:var(--accent);margin-bottom:12px;text-shadow:0 0 8px #d4af37;}
-.hero p{font-size:20px;line-height:1.6;color:var(--text)}
-.card{background:linear-gradient(145deg,#1a1714,#2b231a);border-radius:20px;padding:30px;max-width:1000px;width:100%;box-shadow:0 0 35px rgba(212,175,55,0.2);transition:transform 0.3s, box-shadow 0.3s;}
-.card:hover{transform:translateY(-5px);box-shadow:0 0 50px rgba(212,175,55,0.35);}
-.card h2{color:var(--accent);margin-bottom:14px;font-size:26px;text-shadow:0 0 5px #d4af37;}
-.card p.subtitle{font-size:15px;color:#d1c68b;margin-bottom:22px;}
-.members{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:26px;}
-.member{background:linear-gradient(145deg,#2a2119,#3a291f);border-radius:18px;overflow:hidden;position:relative;cursor:pointer;transition:transform .4s, box-shadow .4s, background .4s;}
-.member::before{content:"";position:absolute; top:0; left:0; width:100%; height:100%;background:linear-gradient(0deg,rgba(0,0,0,0.2),rgba(0,0,0,0.0));pointer-events:none;transition:background 0.4s;}
-.member:hover{transform:translateY(-12px) scale(1.05);box-shadow:0 12px 40px rgba(212,175,55,0.55);background:linear-gradient(145deg,#3a2b1f,#4a3525);}
-.member img{width:100%;height:220px;object-fit:cover;border-bottom:1px solid rgba(212,175,55,0.2);transition:transform .5s, filter .5s;}
-.member:hover img{transform:scale(1.1);filter:brightness(1.15) contrast(1.1);}
-.member-content{padding:18px;}
-.member h3{margin:0 0 8px;color:#fff;font-size:20px;text-shadow:0 0 8px #d4af37;}
-.member .subtitle{margin:0 0 14px;color:#cfc08a;font-size:15px;}
-.member a.fb-icon{margin-right:12px;color:var(--accent);font-size:15px;text-decoration:none;transition:all .3s;}
-.member a.fb-icon:hover{color:#3b5998;transform:scale(1.1);}
-.member button.deleteBtn{position:absolute;top:12px;right:12px;background:var(--danger);border:none;color:#fff;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:13px;transition:background 0.3s;}
-.member button.deleteBtn:hover{background:#c0392b;}
-.controls{margin-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.btn{background:var(--accent);border:none;color:#1a0f00;padding:12px 20px;border-radius:10px;cursor:pointer;font-weight:700;transition:all .3s;text-shadow:0 0 5px #d4af37;}
-.btn:hover{background:var(--btnHover);color:#0b0a0a;transform:scale(1.05);}
-#searchMember{width:100%;padding:12px;border-radius:10px;border:1px solid #444;margin-bottom:22px;font-size:15px;color:#fff;background:#1b1613;}
-footer{background:#0b0a0a;padding:22px 32px;text-align:center;font-size:14px;color:#cfc08a;border-top:1px solid rgba(212,175,55,0.1)}
-#welcomeOverlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(11,10,10,0.95);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:25px;z-index:1000;transition:opacity 0.3s;}
-#welcomeOverlay img{width:160px;height:160px;object-fit:contain;animation:pulse 2s infinite;}
-#welcomeOverlay h1{color:var(--accent);font-size:30px;text-align:center;text-shadow:0 0 8px #d4af37;}
-#enterBtn,#enterAdminBtn{background:var(--accent);border:none;padding:14px 28px;font-size:16px;color:#1a0f00;border-radius:12px;cursor:pointer;transition:all .3s;text-shadow:0 0 5px #d4af37;}
-#enterBtn:hover,#enterAdminBtn:hover{background:var(--btnHover);color:#0b0a0a;transform:scale(1.05);}
-#adminPassword{padding:12px;border-radius:10px;border:1px solid #444;font-size:15px;background:#1b1613;color:#fff;width:260px;text-align:center;}
-#passMsg{color:#e74c3c; display:none; font-size:15px;}
-@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Prompt',sans-serif;}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+}
+
+/* HEADER */
+header{
+    background:var(--header);
+    padding:14px 32px;
+    border-bottom:4px solid var(--accent);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+}
+
+header h1{
+    color:var(--accent);
+    font-size:22px;
+    font-weight:600;
+}
+
+header .controls{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+#search{
+    padding:8px 12px;
+    border-radius:8px;
+    border:none;
+    width:210px;
+    outline:none;
+    font-size:14px;
+}
+
+.btn{
+    background:var(--accent);
+    border:none;
+    padding:8px 14px;
+    border-radius:7px;
+    font-weight:600;
+    cursor:pointer;
+    color:#000;
+    font-size:14px;
+}
+
+.range{ width:90px; }
+
+/* MAIN BODY */
+.container{
+    max-width:1050px;
+    margin:auto;
+    padding:20px;
+}
+
+.section-title{
+    font-size:20px;
+    color:var(--accent);
+    font-weight:600;
+    margin:25px 0 10px;
+    border-left:6px solid var(--accent);
+    padding-left:10px;
+}
+
+/* GRID CARD */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+    gap:14px;
+}
+
+.card{
+    background:var(--card);
+    padding:12px;
+    border-radius:12px;
+    transition:.2s;
+}
+
+.card:hover{ transform:scale(1.03); }
+
+.card img{
+    width:100%;
+    height:150px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+.name{
+    margin-top:8px;
+    font-size:17px;
+    font-weight:600;
+}
+
+.role{
+    font-size:13px;
+    opacity:0.8;
+}
+
+.copyBtn{
+    margin-top:6px;
+    background:var(--accent);
+    border:none;
+    padding:7px 12px;
+    font-size:13px;
+    border-radius:6px;
+    cursor:pointer;
+    width:100%;
+    color:#000;
+}
+
+/* PAGINATION */
+.pagination{
+    margin-top:20px;
+    display:flex;
+    justify-content:center;
+    gap:10px;
+}
+
+.pageBtn{
+    background:var(--accent);
+    border:none;
+    padding:8px 12px;
+    font-size:14px;
+    border-radius:6px;
+    cursor:pointer;
+    color:#000;
+}
 </style>
 </head>
+
 <body>
 
-<div id="welcomeOverlay">
-  <img src="https://i.postimg.cc/YCcD95MB/image.png" alt="Logo">
-  <h1>ยินดีต้อนรับสู่ 179 & GMR</h1>
-  <button id="enterBtn">เข้าสู่เว็บไซต์ (ปกติ)</button>
-  <input type="password" id="adminPassword" placeholder="รหัสแอดมิน">
-  <button id="enterAdminBtn">เข้าสู่เว็บไซต์ (Admin)</button>
-  <p id="passMsg">รหัสไม่ถูกต้อง</p>
-</div>
-
 <header>
-  <div class="logo">
-    <img src="https://i.postimg.cc/YCcD95MB/image.png" alt="Logo">
-    179 & GMR
-  </div>
-  <nav>
-    <a href="#about">เกี่ยวกับ</a>
-    <a href="#members">สมาชิก</a>
-    <a href="#contact">ติดต่อ</a>
-  </nav>
+    <h1>179 List Name</h1>
+
+    <div class="controls">
+        <input type="text" id="search" placeholder="ค้นหาสมาชิก...">
+        <button class="btn" id="playBtn">▶ เล่นเพลง</button>
+        <input type="range" id="vol" class="range" min="0" max="1" value="0.5" step="0.01">
+    </div>
 </header>
 
-<main>
-  <section class="hero">
-    <img src="https://i.postimg.cc/YCcD95MB/image.png" alt="Logo">
-    <h1>179 & GMR</h1>
-    <p>Gumarun</p>
-  </section>
+<div class="container">
 
-  <section id="members" class="card">
-    <h2>สมาชิก</h2>
-    <p class="subtitle">ถ้าไม่มีรายชื่อ แสดงว่าปลอมทั้งหมด</p>
-    <input type="text" id="searchMember" placeholder="ค้นหาชื่อสมาชิก...">
-    <div id="memberWrap" class="members"></div>
-    <div class="controls">
-      <button id="prev" class="btn">ก่อนหน้า</button>
-      <button id="next" class="btn">ถัดไป</button>
-      <button id="toggleMusic" class="btn">▶ เล่นเพลง</button>
-      <button id="addMemberBtn" class="btn" style="display:none;">➕ เพิ่มสมาชิก (Admin)</button>
-    </div>
-  </section>
+    <div class="section-title">Founders</div>
+    <div id="founder" class="grid"></div>
+    <div id="pagFounder" class="pagination"></div>
 
-  <section id="about" class="card">
-    <h2>เกี่ยวกับเรา</h2>
-    <p class="subtitle">179 & GUMARUN 2024-2025</p>
-  </section>
+    <div class="section-title">Members</div>
+    <div id="member" class="grid"></div>
+    <div id="pagMember" class="pagination"></div>
 
-  <section id="contact" class="card">
-    <h2>ติดต่อ</h2>
-    <p class="subtitle">Instagram: <a href="#" style="color:var(--accent)">
-      @_zxe.bangbon3, @sura.guy09, @n.o2936
-    </a></p>
-    <p class="subtitle">Page: 179 Community</p>
-  </section>
-</main>
+</div>
 
-<footer>
-  Designed by 179 & GMR © 2025 
-</footer>
-
-<audio id="bgAudio" loop src="https://cdn.pixabay.com/download/audio/2021/10/04/audio_5b8a3b5b1a.mp3?filename=calm-ambient-110117.mp3"></audio>
+<audio id="bgMusic" loop src="https://cdn.pixabay.com/download/audio/2021/10/04/audio_5b8a3b5b1a.mp3"></audio>
 
 <script>
-const members = [
-  {name:'Zeno Gumarun',role:'Founder',img:'https://i.postimg.cc/sXC5TDNS/281010419-111440861565383-1295873477742202255-n.jpg',fb:'https://www.facebook.com/photo/?fbid=111440864898716&set=a.110029031706566'},
-  {name:'BungJoke Lonthangkhana ',role:'Founder',img:'https://i.postimg.cc/1RY9PF3Z/482010978-517799924738250-5608356900494938275-n.png',fb:'https://www.facebook.com/bang.c.kh.ku.ma.ran'},
+/* DATA พร้อม FB */
+const allMembers = [
+  {name:'Zeno Gumarun',role:'Founder',img:'https://i.postimg.cc/sXC5TDNS/281010419-111440861565383-1295873477742202255-n.jpg',fb:'https://www.facebook.com/'},
+  {name:'BungJoke Lonthangkhana',role:'Founder',img:'https://i.postimg.cc/1RY9PF3Z/482010978-517799924738250-5608356900494938275-n.png',fb:'https://www.facebook.com/bang.c.kh.ku.ma.ran'},
   {name:'Mind Gumarun',role:'Founder',img:'https://i.postimg.cc/Bb8tsBWZ/476345984-546276861798001-2605718371620205500-n.png',fb:'https://www.facebook.com/anakin.Rhnk'},
-  {name:'Kapo Gumarun',role:'Leader',img:'https://i.postimg.cc/gcgmHTXr/481893759-122271886346001818-7950197713354393065-n.png',fb:'https://www.facebook.com/kapo.gumarun'},
-  {name:'Nayx Gumarun',role:'Leader',img:'https://i.postimg.cc/gj5GGx88/468977811-122188227656241663-5795268461173550526-n.png',fb:'https://www.facebook.com/profile.php?id=61557249911802'},
-  {name:'Witta Gumarun',role:'Head',img:'https://i.postimg.cc/k4dKw5Hf/483918166-122202900782188960-1045919471961663067-n.png',fb:'https://www.facebook.com/profile.php?id=61555668812380'},
-  {name:'Ryan Gumarun',role:'Head',img:'https://i.postimg.cc/CLz23F7J/553179905-2871262436396827-8916579718733061737-n.jpg',fb:'https://www.facebook.com/aussawin.wiseat/'},
-  {name:'Banking Gumarun',role:'Member',img:'https://i.postimg.cc/fTfqX1kp/image.png',fb:'https://www.facebook.com/bank.kub.448958'},
-  {name:'Tee Gumarun',role:'Member',img:'https://i.postimg.cc/fTfqX1kp/image.png',fb:'https://www.facebook.com/te.te.711259'},
+
+  {name:'Kapo Gumarun',role:'Member',img:'https://i.postimg.cc/gcgmHTXr/481893759-122271886346001818-7950197713354393065-n.png',fb:'https://www.facebook.com/kapo.gumarun'},
+  {name:'Nayx Lonthangkhana ',role:'Member',img:'https://i.postimg.cc/gj5GGx88/468977811-122188227656241663-5795268461173550526-n.png',fb:'https://www.facebook.com/profile.php?id=61557249911802'},
+
+  {name:'Witta Rakkaimaipen ',role:'Member',img:'https://i.postimg.cc/k4dKw5Hf/483918166-122202900782188960-1045919471961663067-n.png',fb:'https://www.facebook.com/profile.php?id=61555668812380'},
+  {name:'Ryan Gumarun',role:'Member',img:'https://i.postimg.cc/CLz23F7J/553179905-2871262436396827-8916579718733061737-n.jpg',fb:'https://www.facebook.com/profile.php?id=61581903673434'},
+
   {name:'Shimo Gumarun',role:'Member',img:'https://i.postimg.cc/fTfqX1kp/image.png',fb:'https://www.facebook.com/profile.php?id=61573758217528'},
-  {name:'Hades Gumarun',role:'Member',img:'https://i.postimg.cc/j5cz3bPz/440383557-122102417222310243-6728030251805127040-n.png',fb:'https://www.facebook.com/profile.php?id=61559307307616'}
+  {name:'Hades Gumarun',role:'Member',img:'https://i.postimg.cc/j5cz3bPz/440383557-122102417222310243-6728030251805127040-n.png',fb:'https://www.facebook.com/profile.php?id=61558092953455'}
 ];
 
-const wrap=document.getElementById('memberWrap');
-let page=0; const perPage=3;
-let filteredMembers=[...members];
-let isAdmin=false;
+/* ---------- PAGINATION ---------- */
+const PER_PAGE = 3;
 
-function render(){
-  wrap.innerHTML='';
-  const start=page*perPage;
-  const slice=filteredMembers.slice(start,start+perPage);
-  if(slice.length===0){ page=0; return render(); }
-  slice.forEach((m)=>{
-    const el=document.createElement('div');
-    el.className='member';
-    el.innerHTML=`
-      <img src="${m.img}" alt="${m.name}">
-      <div class="member-content">
-        <h3>${m.role==='Founder'?'👑 ':''}${m.name}</h3>
-        <div class="subtitle">${m.role}</div>
-        ${m.fb?`<a href="${m.fb}" target="_blank" class="fb-icon">📘 Facebook</a>`:''}
-        ${isAdmin ? `<button class="deleteBtn" data-index="${members.indexOf(m)}">🗑 ลบ</button>` : ''}
-      </div>
-    `;
-    wrap.appendChild(el);
-  });
-  document.getElementById('addMemberBtn').style.display = isAdmin ? 'inline-block' : 'none';
+function renderGroup(role,boxId,pagId){
+    const box = document.getElementById(boxId);
+    const pag = document.getElementById(pagId);
 
-  if(isAdmin){
-    document.querySelectorAll('.deleteBtn').forEach(btn=>{
-      btn.addEventListener('click',()=>{
-        const idx=parseInt(btn.getAttribute('data-index'));
-        if(confirm(`คุณแน่ใจจะลบ ${members[idx].name} ?`)){
-          members.splice(idx,1);
-          filteredMembers=[...members];
-          render();
-        }
-      });
+    box.innerHTML = "";
+    pag.innerHTML = "";
+
+    let search = document.getElementById("search").value.toLowerCase();
+
+    let data = allMembers.filter(m => 
+        m.role === role && m.name.toLowerCase().includes(search)
+    );
+
+    let total = Math.ceil(data.length / PER_PAGE);
+    if(total === 0) return;
+
+    let page = window[`page_${role}`] || 1;
+    if(page > total) page = 1;
+
+    window[`page_${role}`] = page;
+
+    let start = (page-1)*PER_PAGE;
+    let list = data.slice(start,start+PER_PAGE);
+
+    list.forEach(x=>{
+        box.innerHTML += `
+        <div class="card">
+            <img src="${x.img}">
+            <div class="name">${x.name}</div>
+            <div class="role">${x.role}</div>
+            <button class="copyBtn" onclick="copyFB('${x.fb}')">📋 Copy Facebook</button>
+        </div>`;
     });
-  }
+
+    for(let i=1;i<=total;i++){
+        pag.innerHTML += `
+           <button class="pageBtn" onclick="gotoPage('${role}',${i})">${i}</button>
+        `;
+    }
 }
 
-document.getElementById('prev').addEventListener('click',()=>{ page=Math.max(0,page-1); render(); });
-document.getElementById('next').addEventListener('click',()=>{ if((page+1)*perPage<filteredMembers.length) page++; else page=0; render(); });
-document.getElementById('searchMember').addEventListener('input',(e)=>{
-  const keyword=e.target.value.toLowerCase();
-  filteredMembers=members.filter(m=>m.name.toLowerCase().includes(keyword));
-  page=0; render();
-});
+function gotoPage(role,p){
+    window[`page_${role}`] = p;
+    renderAll();
+}
 
-const audio=document.getElementById('bgAudio');
-const btn=document.getElementById('toggleMusic');
-let playing=false;
-btn.addEventListener('click',()=>{
-  if(!playing){ audio.play().catch(()=>{}); btn.textContent='⏸ หยุดเพลง'; playing=true; }
-  else{ audio.pause(); btn.textContent='▶ เล่นเพลง'; playing=false; }
-});
+/* COPY */
+function copyFB(text){
+    navigator.clipboard.writeText(text);
+    alert("คัดลอก Facebook แล้ว!");
+}
 
-setInterval(()=>{ document.getElementById('next').click(); },6000);
-render();
+/* RENDER ทั้งหมด */
+function renderAll(){
+    renderGroup("Founder","founder","pagFounder");
+    renderGroup("Member","member","pagMember");
+}
 
-const enterBtn=document.getElementById('enterBtn');
-const enterAdminBtn=document.getElementById('enterAdminBtn');
-const passwordInput=document.getElementById('adminPassword');
-const passMsg=document.getElementById('passMsg');
-const overlay=document.getElementById('welcomeOverlay');
-const correctPassword='179GMRSKY';
+document.getElementById("search").addEventListener("input",renderAll);
+renderAll();
 
-enterBtn.addEventListener('click',()=>{ overlay.style.display='none'; isAdmin=false; render(); });
-enterAdminBtn.addEventListener('click',()=>{
-  if(passwordInput.value === correctPassword){
-    overlay.style.display='none';
-    isAdmin=true;
-    passMsg.style.display='none';
-    render();
-  } else { passMsg.style.display='block'; }
-});
-passwordInput.addEventListener('keypress',(e)=>{ if(e.key==='Enter'){ enterAdminBtn.click(); } });
+/* MUSIC SYSTEM */
+const music = document.getElementById("bgMusic");
+const playBtn = document.getElementById("playBtn");
+let playing = false;
 
-document.getElementById('addMemberBtn').addEventListener('click',()=>{
-  const name=prompt("ชื่อสมาชิก:");
-  const role=prompt("ตำแหน่ง:");
-  const img=prompt("URL รูปภาพ:");
-  const fb=prompt("Facebook URL:");
-  if(name && role){
-    members.push({name,role,img,fb});
-    filteredMembers=[...members];
-    render();
-  }
-});
+playBtn.onclick = () =>{
+    if(!playing){
+        music.play(); playing=true;
+        playBtn.textContent="⏸ หยุดเพลง";
+    } else {
+        music.pause(); playing=false;
+        playBtn.textContent="▶ เล่นเพลง";
+    }
+};
+
+document.getElementById("vol").oninput = e =>{
+    music.volume = e.target.value;
+};
 </script>
+
 </body>
 </html>
