@@ -2,162 +2,254 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>179 List Name</title>
-<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
-
+<title>179</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-    --bg:#3b3b3b;
-    --header:#4b4b4b;
-    --card:#4c4c4c;
-    --accent:#ffffff;   /* ← เปลี่ยนเป็นสีขาว */
-    --text:#ffffff;
+    --bg:#121212;
+    --header:#1e1e1e;
+    --card:#252525;
+    --accent:#00bfff;
+    --fb-blue:#1877f2;
+    --text:#e0e0e0;
+    --text-light:#aaaaaa;
+    --glow:#00bfff88;
 }
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Prompt',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Sarabun',sans-serif;}
 
 body{
     background:var(--bg);
     color:var(--text);
+    line-height:1.6;
 }
 
-/* HEADER */
 header{
     background:var(--header);
-    padding:14px 32px;
-    border-bottom:4px solid var(--accent);
+    padding:20px 40px;
+    border-bottom:5px solid var(--accent);
     display:flex;
     justify-content:space-between;
     align-items:center;
     position:sticky;
     top:0;
+    box-shadow:0 4px 10px rgba(0,0,0,0.5);
+}
+
+.header-left{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+header .logo{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid var(--accent);
+    box-shadow:0 0 15px rgba(0,191,255,0.5);
 }
 
 header h1{
     color:var(--accent);
-    font-size:22px;
-    font-weight:600;
+    font-size:28px;
+    font-weight:700;
+    letter-spacing:1px;
 }
 
 header .controls{
     display:flex;
     align-items:center;
-    gap:10px;
+    gap:15px;
 }
 
 #search{
-    padding:8px 12px;
+    padding:10px 15px;
     border-radius:8px;
-    border:none;
-    width:210px;
+    border:1px solid var(--accent);
+    background:#333;
+    color:var(--text);
+    width:250px;
     outline:none;
-    font-size:14px;
+    font-size:15px;
 }
 
-.btn{
-    background:var(--accent);
-    border:none;
-    padding:8px 14px;
-    border-radius:7px;
-    font-weight:600;
-    cursor:pointer;
-    color:#000;
-    font-size:14px;
-}
-
-.range{ width:90px; }
-
-/* MAIN BODY */
 .container{
-    max-width:1050px;
+    max-width:1200px;
     margin:auto;
-    padding:20px;
+    padding:40px 20px;
 }
 
 .section-title{
-    font-size:20px;
+    font-size:26px;
     color:var(--accent);
-    font-weight:600;
-    margin:25px 0 10px;
-    border-left:6px solid var(--accent);
-    padding-left:10px;
+    font-weight:700;
+    margin:40px 0 20px;
+    border-left:8px solid var(--accent);
+    padding-left:15px;
 }
 
-/* GRID CARD */
 .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
-    gap:14px;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:24px;
 }
 
 .card{
     background:var(--card);
-    padding:12px;
-    border-radius:12px;
-    transition:.2s;
+    padding:20px;
+    border-radius:16px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.4);
+    border:1px solid #333;
+    transition:all 0.4s ease;
+    position:relative;
+    overflow:hidden;
 }
 
-.card:hover{ transform:scale(1.03); }
+/* เอฟเฟกต์ hover โหดๆ */
+.card:hover{
+    transform:translateY(-15px) scale(1.03);
+    box-shadow:0 20px 40px rgba(0,191,255,0.4);
+    border:1px solid var(--accent);
+    z-index:10;
+}
+
+.card::before{
+    content:"";
+    position:absolute;
+    top:0; left:0; right:0; bottom:0;
+    background:linear-gradient(135deg, transparent, var(--glow));
+    opacity:0;
+    transition:opacity 0.4s ease;
+    pointer-events:none;
+}
+
+.card:hover::before{
+    opacity:1;
+}
 
 .card img{
     width:100%;
-    height:150px;
+    height:180px;
     object-fit:cover;
-    border-radius:10px;
+    border-radius:12px;
+    margin-bottom:15px;
+    transition:transform 0.4s ease;
+}
+
+.card:hover img{
+    transform:scale(1.08);
 }
 
 .name{
-    margin-top:8px;
-    font-size:17px;
-    font-weight:600;
+    font-size:20px;
+    font-weight:700;
+    margin-bottom:6px;
+    transition:color 0.3s ease;
+}
+
+.card:hover .name{
+    color:var(--accent);
+    text-shadow:0 0 10px var(--glow);
 }
 
 .role{
-    font-size:13px;
-    opacity:0.8;
+    font-size:14px;
+    color:var(--text-light);
+    margin-bottom:16px;
+    transition:color 0.3s ease;
 }
 
-.copyBtn{
-    margin-top:6px;
-    background:var(--accent);
+.card:hover .role{
+    color:#ffffff;
+}
+
+.fbBtn{
+    background:var(--fb-blue);
+    color:white;
     border:none;
-    padding:7px 12px;
-    font-size:13px;
-    border-radius:6px;
+    padding:12px 16px;
+    font-size:15px;
+    font-weight:600;
+    border-radius:50px;
     cursor:pointer;
     width:100%;
-    color:#000;
-}
-
-/* PAGINATION */
-.pagination{
-    margin-top:20px;
+    transition:all 0.3s ease;
+    text-decoration:none;
     display:flex;
+    align-items:center;
     justify-content:center;
     gap:10px;
+    box-shadow:0 4px 15px rgba(24,119,242,0.4);
+    position:relative;
+    overflow:hidden;
+}
+
+.fbBtn::before{
+    content:"";
+    position:absolute;
+    top:0; left:-100%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition:0.5s;
+}
+
+.fbBtn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 25px rgba(24,119,242,0.6);
+}
+
+.fbBtn:hover::before{
+    left:100%;
+}
+
+.fbBtn i{
+    font-size:20px;
+}
+
+.pagination{
+    margin-top:30px;
+    display:flex;
+    justify-content:center;
+    gap:12px;
 }
 
 .pageBtn{
-    background:var(--accent);
-    border:none;
-    padding:8px 12px;
-    font-size:14px;
-    border-radius:6px;
+    background:#333;
+    border:1px solid var(--accent);
+    color:var(--text);
+    padding:10px 16px;
+    font-size:15px;
+    border-radius:8px;
     cursor:pointer;
+    min-width:44px;
+    transition:all 0.3s ease;
+}
+
+.pageBtn:hover{
+    background:var(--accent);
+    color:#000;
+    transform:scale(1.1);
+}
+
+.pageBtn.active{
+    background:var(--accent);
     color:#000;
 }
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-
 <body>
 
 <header>
-    <h1>179 List Name</h1>
-
+    <div class="header-left">
+        <img src="https://cdn.discordapp.com/attachments/1425888252891631817/1454531858321641562/53_20251216175443.png?ex=695ca29a&is=695b511a&hm=f04bcd4050cd89957a689929cbef39978557ba247ee44ad7ca762f880949e04e&" alt="179 Logo" class="logo">
+        <h1>179</h1>
+    </div>
     <div class="controls">
         <input type="text" id="search" placeholder="ค้นหาสมาชิก...">
-        <button class="btn" id="playBtn">▶ เล่นเพลง</button>
-        <input type="range" id="vol" class="range" min="0" max="1" value="0.5" step="0.01">
     </div>
 </header>
 
@@ -173,47 +265,35 @@ header .controls{
 
 </div>
 
-<audio id="bgMusic" loop src="https://cdn.pixabay.com/download/audio/2021/10/04/audio_5b8a3b5b1a.mp3"></audio>
-
 <script>
-/* DATA พร้อม FB */
 const allMembers = [
   {name:'Zeno Gumarun',role:'Founder',img:'https://i.postimg.cc/sXC5TDNS/281010419-111440861565383-1295873477742202255-n.jpg',fb:'https://www.facebook.com/'},
   {name:'BungJoke Lonthangkhana',role:'Founder',img:'https://i.postimg.cc/1RY9PF3Z/482010978-517799924738250-5608356900494938275-n.png',fb:'https://www.facebook.com/bang.c.kh.ku.ma.ran'},
   {name:'Mind Gumarun',role:'Founder',img:'https://i.postimg.cc/Bb8tsBWZ/476345984-546276861798001-2605718371620205500-n.png',fb:'https://www.facebook.com/anakin.Rhnk'},
-
   {name:'Kapo Gumarun',role:'Member',img:'https://i.postimg.cc/gcgmHTXr/481893759-122271886346001818-7950197713354393065-n.png',fb:'https://www.facebook.com/kapo.gumarun'},
   {name:'Nayx Lonthangkhana ',role:'Member',img:'https://i.postimg.cc/gj5GGx88/468977811-122188227656241663-5795268461173550526-n.png',fb:'https://www.facebook.com/profile.php?id=61557249911802'},
-
   {name:'Witta Rakkaimaipen ',role:'Member',img:'https://i.postimg.cc/k4dKw5Hf/483918166-122202900782188960-1045919471961663067-n.png',fb:'https://www.facebook.com/profile.php?id=61555668812380'},
   {name:'Ryan Gumarun',role:'Member',img:'https://i.postimg.cc/CLz23F7J/553179905-2871262436396827-8916579718733061737-n.jpg',fb:'https://www.facebook.com/profile.php?id=61581903673434'},
-
   {name:'Shimo Gumarun',role:'Member',img:'https://i.postimg.cc/fTfqX1kp/image.png',fb:'https://www.facebook.com/profile.php?id=61573758217528'},
   {name:'Hades Gumarun',role:'Member',img:'https://i.postimg.cc/j5cz3bPz/440383557-122102417222310243-6728030251805127040-n.png',fb:'https://www.facebook.com/profile.php?id=61558092953455'}
 ];
 
-/* ---------- PAGINATION ---------- */
-const PER_PAGE = 3;
+const PER_PAGE = 6;
 
 function renderGroup(role,boxId,pagId){
     const box = document.getElementById(boxId);
     const pag = document.getElementById(pagId);
-
     box.innerHTML = "";
     pag.innerHTML = "";
 
     let search = document.getElementById("search").value.toLowerCase();
-
-    let data = allMembers.filter(m => 
-        m.role === role && m.name.toLowerCase().includes(search)
-    );
+    let data = allMembers.filter(m => m.role === role && m.name.toLowerCase().includes(search));
 
     let total = Math.ceil(data.length / PER_PAGE);
-    if(total === 0) return;
+    if(total === 0) { box.innerHTML = "<p style='grid-column:1/-1;text-align:center;color:#aaa;'>ไม่พบข้อมูล</p>"; return; }
 
     let page = window[`page_${role}`] || 1;
-    if(page > total) page = 1;
-
+    if(page > total) page = total;
     window[`page_${role}`] = page;
 
     let start = (page-1)*PER_PAGE;
@@ -222,17 +302,17 @@ function renderGroup(role,boxId,pagId){
     list.forEach(x=>{
         box.innerHTML += `
         <div class="card">
-            <img src="${x.img}">
+            <img src="${x.img}" alt="${x.name}">
             <div class="name">${x.name}</div>
-            <div class="role">${x.role}</div>
-            <button class="copyBtn" onclick="copyFB('${x.fb}')">📋 Copy Facebook</button>
+            <div class="role">${x.role === 'Founder' ? 'ผู้ก่อตั้ง' : 'สมาชิก'}</div>
+            <a href="${x.fb}" target="_blank" class="fbBtn">
+                <i class="fab fa-facebook-f"></i>Facebook
+            </a>
         </div>`;
     });
 
     for(let i=1;i<=total;i++){
-        pag.innerHTML += `
-           <button class="pageBtn" onclick="gotoPage('${role}',${i})">${i}</button>
-        `;
+        pag.innerHTML += `<button class="pageBtn ${i===page?'active':''}" onclick="gotoPage('${role}',${i})">${i}</button>`;
     }
 }
 
@@ -241,39 +321,13 @@ function gotoPage(role,p){
     renderAll();
 }
 
-/* COPY */
-function copyFB(text){
-    navigator.clipboard.writeText(text);
-    alert("คัดลอก Facebook แล้ว!");
-}
-
-/* RENDER ทั้งหมด */
 function renderAll(){
     renderGroup("Founder","founder","pagFounder");
     renderGroup("Member","member","pagMember");
 }
 
-document.getElementById("search").addEventListener("input",renderAll);
+document.getElementById("search").addEventListener("input",()=>{ window.page_Founder=1; window.page_Member=1; renderAll(); });
 renderAll();
-
-/* MUSIC SYSTEM */
-const music = document.getElementById("bgMusic");
-const playBtn = document.getElementById("playBtn");
-let playing = false;
-
-playBtn.onclick = () =>{
-    if(!playing){
-        music.play(); playing=true;
-        playBtn.textContent="⏸ หยุดเพลง";
-    } else {
-        music.pause(); playing=false;
-        playBtn.textContent="▶ เล่นเพลง";
-    }
-};
-
-document.getElementById("vol").oninput = e =>{
-    music.volume = e.target.value;
-};
 </script>
 
 </body>
