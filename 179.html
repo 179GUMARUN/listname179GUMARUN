@@ -2,186 +2,259 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>179</title>
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
 :root{
-    --bg:#121212;
-    --header:#1e1e1e;
-    --card:#252525;
-    --accent:#00bfff;
-    --fb-blue:#1877f2;
-    --text:#e0e0e0;
-    --text-light:#aaaaaa;
-    --glow:#00bfff88;
+    --bg:#0b0b0b;
+    --header:#111;
+    --card:#141414;
+    --border:#2a2a2a;
+    --white:#ffffff;
+    --gray:#bdbdbd;
+    --gray2:#8a8a8a;
+    --shadow:rgba(0,0,0,0.55);
+    --glow:rgba(255,255,255,0.20);
+
+    --fb:#111; /* โทนขาว-ดำ */
 }
 
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Sarabun',sans-serif;}
-
 body{
     background:var(--bg);
-    color:var(--text);
+    color:var(--white);
     line-height:1.6;
 }
 
+/* ===== Splash Screen (3s) ===== */
+#splash{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background: radial-gradient(1200px 800px at 50% 40%, #1a1a1a 0%, #0a0a0a 55%, #000 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+.splash-wrap{
+    text-align:center;
+    transform: translateY(6px);
+    opacity:0;
+    animation: splashIn 700ms ease forwards;
+}
+
+.splash-logo{
+    width:160px;
+    height:160px;
+    border-radius:24px;
+    object-fit:contain;
+    filter: drop-shadow(0 18px 45px rgba(0,0,0,0.7));
+    animation: logoPulse 1200ms ease-in-out infinite;
+}
+
+.splash-ring{
+    position:absolute;
+    width:420px;
+    height:420px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,0.10);
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.06) inset;
+    animation: ringSpin 2200ms linear infinite;
+}
+
+.splash-shine{
+    position:absolute;
+    width:55%;
+    height:55%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+    transform: rotate(15deg);
+    filter: blur(1px);
+    animation: shineMove 1300ms ease-in-out infinite;
+}
+
+.splash-text{
+    margin-top:16px;
+    font-size:14px;
+    color:rgba(255,255,255,0.75);
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+@keyframes splashIn{
+    0%{ opacity:0; transform: translateY(10px) scale(0.98); }
+    100%{ opacity:1; transform: translateY(0) scale(1); }
+}
+@keyframes logoPulse{
+    0%,100%{ transform: scale(1); }
+    50%{ transform: scale(1.035); }
+}
+@keyframes ringSpin{
+    0%{ transform: rotate(0deg); }
+    100%{ transform: rotate(360deg); }
+}
+@keyframes shineMove{
+    0%{ transform: translateX(-40%) rotate(15deg); opacity:0.2; }
+    50%{ transform: translateX(40%) rotate(15deg); opacity:0.55; }
+    100%{ transform: translateX(-40%) rotate(15deg); opacity:0.2; }
+}
+
+/* ตอนปิด splash */
+#splash.fade-out{
+    animation: splashOut 550ms ease forwards;
+}
+@keyframes splashOut{
+    to{ opacity:0; transform: scale(1.02); visibility:hidden; }
+}
+
+/* ===== Header ===== */
 header{
     background:var(--header);
-    padding:20px 40px;
-    border-bottom:5px solid var(--accent);
+    padding:18px 34px;
+    border-bottom:2px solid rgba(255,255,255,0.10);
     display:flex;
     justify-content:space-between;
     align-items:center;
     position:sticky;
     top:0;
-    box-shadow:0 4px 10px rgba(0,0,0,0.5);
+    box-shadow:0 6px 16px var(--shadow);
+    z-index:50;
 }
 
-.header-left{
-    display:flex;
-    align-items:center;
-    gap:20px;
-}
-
+.header-left{display:flex;align-items:center;gap:16px;}
 header .logo{
-    width:60px;
-    height:60px;
-    border-radius:50%;
-    object-fit:cover;
-    border:3px solid var(--accent);
-    box-shadow:0 0 15px rgba(0,191,255,0.5);
+    width:54px;
+    height:54px;
+    border-radius:14px;
+    object-fit:contain;
+    background:#0f0f0f;
+    border:1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.55);
 }
-
 header h1{
-    color:var(--accent);
-    font-size:28px;
-    font-weight:700;
+    color:var(--white);
+    font-size:26px;
+    font-weight:800;
     letter-spacing:1px;
 }
 
-header .controls{
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
-
+header .controls{display:flex;align-items:center;gap:12px;}
 #search{
-    padding:10px 15px;
-    border-radius:8px;
-    border:1px solid var(--accent);
-    background:#333;
-    color:var(--text);
-    width:250px;
+    padding:10px 14px;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,0.18);
+    background:#0f0f0f;
+    color:var(--white);
+    width:260px;
     outline:none;
     font-size:15px;
+    transition:all .2s ease;
+}
+#search:focus{
+    border-color: rgba(255,255,255,0.35);
+    box-shadow: 0 0 0 4px rgba(255,255,255,0.06);
 }
 
+/* ===== Layout ===== */
 .container{
     max-width:1200px;
     margin:auto;
-    padding:40px 20px;
+    padding:34px 18px 70px;
 }
 
 .section-title{
-    font-size:26px;
-    color:var(--accent);
-    font-weight:700;
-    margin:40px 0 20px;
-    border-left:8px solid var(--accent);
-    padding-left:15px;
+    font-size:24px;
+    color:var(--white);
+    font-weight:800;
+    margin:34px 0 16px;
+    border-left:6px solid rgba(255,255,255,0.30);
+    padding-left:14px;
+    letter-spacing:0.3px;
 }
 
 .grid{
     display:grid;
     grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
-    gap:24px;
+    gap:22px;
 }
 
+/* ===== Card ===== */
 .card{
-    background:var(--card);
-    padding:20px;
-    border-radius:16px;
-    box-shadow:0 6px 15px rgba(0,0,0,0.4);
-    border:1px solid #333;
-    transition:all 0.4s ease;
+    background:linear-gradient(180deg, #161616 0%, #101010 100%);
+    padding:18px;
+    border-radius:18px;
+    box-shadow:0 10px 26px rgba(0,0,0,0.55);
+    border:1px solid rgba(255,255,255,0.08);
+    transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease;
     position:relative;
     overflow:hidden;
 }
 
-/* เอฟเฟกต์ hover โหดๆ */
 .card:hover{
-    transform:translateY(-15px) scale(1.03);
-    box-shadow:0 20px 40px rgba(0,191,255,0.4);
-    border:1px solid var(--accent);
-    z-index:10;
+    transform:translateY(-10px);
+    box-shadow:0 18px 45px rgba(0,0,0,0.75);
+    border-color: rgba(255,255,255,0.18);
 }
 
 .card::before{
     content:"";
-    position:absolute;
-    top:0; left:0; right:0; bottom:0;
-    background:linear-gradient(135deg, transparent, var(--glow));
+    position:absolute; inset:0;
+    background: radial-gradient(500px 220px at 20% 0%, rgba(255,255,255,0.06), transparent 55%);
     opacity:0;
-    transition:opacity 0.4s ease;
+    transition:opacity .28s ease;
     pointer-events:none;
 }
-
-.card:hover::before{
-    opacity:1;
-}
+.card:hover::before{opacity:1;}
 
 .card img{
     width:100%;
     height:180px;
     object-fit:cover;
-    border-radius:12px;
-    margin-bottom:15px;
-    transition:transform 0.4s ease;
+    border-radius:14px;
+    margin-bottom:14px;
+    border:1px solid rgba(255,255,255,0.08);
+    transition:transform .28s ease, filter .28s ease;
+    filter: contrast(1.02) saturate(0.95);
 }
-
 .card:hover img{
-    transform:scale(1.08);
+    transform:scale(1.04);
+    filter: contrast(1.06) saturate(1.0);
 }
 
 .name{
-    font-size:20px;
-    font-weight:700;
+    font-size:19px;
+    font-weight:800;
     margin-bottom:6px;
-    transition:color 0.3s ease;
+    color:var(--white);
 }
-
-.card:hover .name{
-    color:var(--accent);
-    text-shadow:0 0 10px var(--glow);
-}
-
 .role{
     font-size:14px;
-    color:var(--text-light);
-    margin-bottom:16px;
-    transition:color 0.3s ease;
+    color:rgba(255,255,255,0.68);
+    margin-bottom:14px;
 }
 
-.card:hover .role{
-    color:#ffffff;
-}
-
+/* ===== Button (Black/White) ===== */
 .fbBtn{
-    background:var(--fb-blue);
-    color:white;
-    border:none;
-    padding:12px 16px;
+    background:#0f0f0f;
+    color:var(--white);
+    border:1px solid rgba(255,255,255,0.18);
+    padding:12px 14px;
     font-size:15px;
-    font-weight:600;
-    border-radius:50px;
+    font-weight:700;
+    border-radius:999px;
     cursor:pointer;
     width:100%;
-    transition:all 0.3s ease;
+    transition:all .25s ease;
     text-decoration:none;
     display:flex;
     align-items:center;
     justify-content:center;
     gap:10px;
-    box-shadow:0 4px 15px rgba(24,119,242,0.4);
+    box-shadow:0 10px 22px rgba(0,0,0,0.55);
     position:relative;
     overflow:hidden;
 }
@@ -189,63 +262,71 @@ header .controls{
 .fbBtn::before{
     content:"";
     position:absolute;
-    top:0; left:-100%;
-    width:100%;
+    top:0; left:-120%;
+    width:120%;
     height:100%;
-    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition:0.5s;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+    transition:0.55s;
 }
-
 .fbBtn:hover{
-    transform:translateY(-3px);
-    box-shadow:0 8px 25px rgba(24,119,242,0.6);
+    transform:translateY(-2px);
+    border-color: rgba(255,255,255,0.32);
+    box-shadow:0 18px 35px rgba(0,0,0,0.75);
 }
+.fbBtn:hover::before{ left:120%; }
+.fbBtn i{ font-size:18px; }
 
-.fbBtn:hover::before{
-    left:100%;
-}
-
-.fbBtn i{
-    font-size:20px;
-}
-
+/* ===== Pagination ===== */
 .pagination{
-    margin-top:30px;
+    margin-top:26px;
     display:flex;
     justify-content:center;
-    gap:12px;
+    gap:10px;
+    flex-wrap:wrap;
 }
 
 .pageBtn{
-    background:#333;
-    border:1px solid var(--accent);
-    color:var(--text);
-    padding:10px 16px;
-    font-size:15px;
-    border-radius:8px;
+    background:#0f0f0f;
+    border:1px solid rgba(255,255,255,0.18);
+    color:var(--white);
+    padding:10px 14px;
+    font-size:14px;
+    border-radius:10px;
     cursor:pointer;
     min-width:44px;
-    transition:all 0.3s ease;
+    transition:all .22s ease;
 }
-
 .pageBtn:hover{
-    background:var(--accent);
+    border-color: rgba(255,255,255,0.35);
+    transform:translateY(-1px);
+}
+.pageBtn.active{
+    background:var(--white);
     color:#000;
-    transform:scale(1.1);
+    border-color: var(--white);
 }
 
-.pageBtn.active{
-    background:var(--accent);
-    color:#000;
+/* ลด motion สำหรับคนที่ปิด animation */
+@media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
 }
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
+<!-- Splash (โชว์ 3 วิ) -->
+<div id="splash" aria-hidden="true">
+    <div class="splash-ring"></div>
+    <div class="splash-shine"></div>
+    <div class="splash-wrap">
+        <img class="splash-logo" src="https://cdn.discordapp.com/attachments/1425522473813934213/1464202392206573588/1.png?ex=6979e23d&is=697890bd&hm=ce62e57f8e217bfc112c585c6b1ef7dc5a49fa38c3e4c7e7ac14e1eafa23f3f6&" alt="179 Logo">
+        <div class="splash-text">179</div>
+    </div>
+</div>
+
 <header>
     <div class="header-left">
-        <img src="https://cdn.discordapp.com/attachments/1425888252891631817/1454531858321641562/53_20251216175443.png?ex=695ca29a&is=695b511a&hm=f04bcd4050cd89957a689929cbef39978557ba247ee44ad7ca762f880949e04e&" alt="179 Logo" class="logo">
+        <img src="https://cdn.discordapp.com/attachments/1425522473813934213/1464202392206573588/1.png?ex=6979e23d&is=697890bd&hm=ce62e57f8e217bfc112c585c6b1ef7dc5a49fa38c3e4c7e7ac14e1eafa23f3f6&" alt="179 Logo" class="logo">
         <h1>179</h1>
     </div>
     <div class="controls">
@@ -254,7 +335,6 @@ header .controls{
 </header>
 
 <div class="container">
-
     <div class="section-title">Founders</div>
     <div id="founder" class="grid"></div>
     <div id="pagFounder" class="pagination"></div>
@@ -262,10 +342,20 @@ header .controls{
     <div class="section-title">Members</div>
     <div id="member" class="grid"></div>
     <div id="pagMember" class="pagination"></div>
-
 </div>
 
 <script>
+/* ====== Splash 3 วิ แล้วค่อยโชว์เว็บ ====== */
+(function(){
+    const splash = document.getElementById("splash");
+    // ถ้าอยากให้ “ครบ 3 วิเป๊ะ” ใช้ 3000
+    setTimeout(()=>{
+        splash.classList.add("fade-out");
+        setTimeout(()=> splash.remove(), 600);
+    }, 3000);
+})();
+
+/* ====== Data ====== */
 const allMembers = [
   {name:'Zeno Gumarun',role:'Founder',img:'https://i.postimg.cc/sXC5TDNS/281010419-111440861565383-1295873477742202255-n.jpg',fb:'https://www.facebook.com/'},
   {name:'BungJoke Lonthangkhana',role:'Founder',img:'https://i.postimg.cc/1RY9PF3Z/482010978-517799924738250-5608356900494938275-n.png',fb:'https://www.facebook.com/bang.c.kh.ku.ma.ran'},
@@ -280,24 +370,28 @@ const allMembers = [
 
 const PER_PAGE = 6;
 
-function renderGroup(role,boxId,pagId){
+function renderGroup(role, boxId, pagId){
     const box = document.getElementById(boxId);
     const pag = document.getElementById(pagId);
     box.innerHTML = "";
     pag.innerHTML = "";
 
-    let search = document.getElementById("search").value.toLowerCase();
-    let data = allMembers.filter(m => m.role === role && m.name.toLowerCase().includes(search));
+    const search = (document.getElementById("search").value || "").toLowerCase();
+    const data = allMembers.filter(m => m.role === role && m.name.toLowerCase().includes(search));
 
-    let total = Math.ceil(data.length / PER_PAGE);
-    if(total === 0) { box.innerHTML = "<p style='grid-column:1/-1;text-align:center;color:#aaa;'>ไม่พบข้อมูล</p>"; return; }
+    const total = Math.ceil(data.length / PER_PAGE);
+
+    if(total === 0){
+        box.innerHTML = "<p style='grid-column:1/-1;text-align:center;color:rgba(255,255,255,0.55);padding:18px 0;'>ไม่พบข้อมูล</p>";
+        return;
+    }
 
     let page = window[`page_${role}`] || 1;
     if(page > total) page = total;
     window[`page_${role}`] = page;
 
-    let start = (page-1)*PER_PAGE;
-    let list = data.slice(start,start+PER_PAGE);
+    const start = (page-1) * PER_PAGE;
+    const list = data.slice(start, start + PER_PAGE);
 
     list.forEach(x=>{
         box.innerHTML += `
@@ -305,7 +399,7 @@ function renderGroup(role,boxId,pagId){
             <img src="${x.img}" alt="${x.name}">
             <div class="name">${x.name}</div>
             <div class="role">${x.role === 'Founder' ? 'ผู้ก่อตั้ง' : 'สมาชิก'}</div>
-            <a href="${x.fb}" target="_blank" class="fbBtn">
+            <a href="${x.fb}" target="_blank" class="fbBtn" rel="noopener">
                 <i class="fab fa-facebook-f"></i>Facebook
             </a>
         </div>`;
@@ -316,7 +410,7 @@ function renderGroup(role,boxId,pagId){
     }
 }
 
-function gotoPage(role,p){
+function gotoPage(role, p){
     window[`page_${role}`] = p;
     renderAll();
 }
@@ -326,7 +420,12 @@ function renderAll(){
     renderGroup("Member","member","pagMember");
 }
 
-document.getElementById("search").addEventListener("input",()=>{ window.page_Founder=1; window.page_Member=1; renderAll(); });
+document.getElementById("search").addEventListener("input", ()=>{
+    window.page_Founder = 1;
+    window.page_Member = 1;
+    renderAll();
+});
+
 renderAll();
 </script>
 
