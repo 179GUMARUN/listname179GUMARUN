@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>179</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -11,420 +12,265 @@
 :root{
     --bg:#0b0b0b;
     --header:#111;
-    --card:#141414;
-    --border:#2a2a2a;
-    --white:#ffffff;
-    --gray:#bdbdbd;
-    --gray2:#8a8a8a;
-    --shadow:rgba(0,0,0,0.55);
-    --glow:rgba(255,255,255,0.20);
-
-    --fb:#111; /* โทนขาว-ดำ */
+    --white:#fff;
 }
 
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Sarabun',sans-serif;}
+
 body{
     background:var(--bg);
     color:var(--white);
-    line-height:1.6;
 }
 
-/* ===== Splash Screen (3s) ===== */
+/* ===== Splash ===== */
 #splash{
     position:fixed;
     inset:0;
     z-index:9999;
-    background: radial-gradient(1200px 800px at 50% 40%, #1a1a1a 0%, #0a0a0a 55%, #000 100%);
+    background:#000;
     display:flex;
     align-items:center;
     justify-content:center;
-    overflow:hidden;
+    transition:0.5s;
 }
 
-.splash-wrap{
-    text-align:center;
-    transform: translateY(6px);
+#splash.fade-out{
     opacity:0;
-    animation: splashIn 700ms ease forwards;
+    pointer-events:none; /* 🔥 แก้กดไม่ได้ */
 }
 
 .splash-logo{
-    width:160px;
-    height:160px;
-    border-radius:24px;
-    object-fit:contain;
-    filter: drop-shadow(0 18px 45px rgba(0,0,0,0.7));
-    animation: logoPulse 1200ms ease-in-out infinite;
-}
-
-.splash-ring{
-    position:absolute;
-    width:420px;
-    height:420px;
-    border-radius:50%;
-    border:1px solid rgba(255,255,255,0.10);
-    box-shadow: 0 0 0 1px rgba(255,255,255,0.06) inset;
-    animation: ringSpin 2200ms linear infinite;
-}
-
-.splash-shine{
-    position:absolute;
-    width:55%;
-    height:55%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
-    transform: rotate(15deg);
-    filter: blur(1px);
-    animation: shineMove 1300ms ease-in-out infinite;
-}
-
-.splash-text{
-    margin-top:16px;
-    font-size:14px;
-    color:rgba(255,255,255,0.75);
-    letter-spacing:2px;
-    text-transform:uppercase;
-}
-
-@keyframes splashIn{
-    0%{ opacity:0; transform: translateY(10px) scale(0.98); }
-    100%{ opacity:1; transform: translateY(0) scale(1); }
-}
-@keyframes logoPulse{
-    0%,100%{ transform: scale(1); }
-    50%{ transform: scale(1.035); }
-}
-@keyframes ringSpin{
-    0%{ transform: rotate(0deg); }
-    100%{ transform: rotate(360deg); }
-}
-@keyframes shineMove{
-    0%{ transform: translateX(-40%) rotate(15deg); opacity:0.2; }
-    50%{ transform: translateX(40%) rotate(15deg); opacity:0.55; }
-    100%{ transform: translateX(-40%) rotate(15deg); opacity:0.2; }
-}
-
-/* ตอนปิด splash */
-#splash.fade-out{
-    animation: splashOut 550ms ease forwards;
-}
-@keyframes splashOut{
-    to{ opacity:0; transform: scale(1.02); visibility:hidden; }
+    width:150px;
 }
 
 /* ===== Header ===== */
 header{
     background:var(--header);
-    padding:18px 34px;
-    border-bottom:2px solid rgba(255,255,255,0.10);
-    display:flex;
-    justify-content:space-between;
+    padding:18px;
+    text-align:center;
+}
+
+/* ===== TS3 Button ===== */
+.ts3-wrap{
+    text-align:center;
+    margin:25px 0;
+}
+
+.ts3Btn{
+    display:inline-flex;
     align-items:center;
-    position:sticky;
-    top:0;
-    box-shadow:0 6px 16px var(--shadow);
-    z-index:50;
-}
-
-.header-left{display:flex;align-items:center;gap:16px;}
-header .logo{
-    width:54px;
-    height:54px;
-    border-radius:14px;
-    object-fit:contain;
-    background:#0f0f0f;
-    border:1px solid rgba(255,255,255,0.15);
-    box-shadow: 0 8px 22px rgba(0,0,0,0.55);
-}
-header h1{
-    color:var(--white);
-    font-size:26px;
+    gap:10px;
+    padding:14px 26px;
+    font-size:16px;
     font-weight:800;
-    letter-spacing:1px;
+    border-radius:999px;
+    text-decoration:none;
+    background:#fff;
+    color:#000;
+    transition:0.25s;
 }
 
-header .controls{display:flex;align-items:center;gap:12px;}
-#search{
-    padding:10px 14px;
-    border-radius:10px;
-    border:1px solid rgba(255,255,255,0.18);
-    background:#0f0f0f;
-    color:var(--white);
-    width:260px;
-    outline:none;
-    font-size:15px;
-    transition:all .2s ease;
-}
-#search:focus{
-    border-color: rgba(255,255,255,0.35);
-    box-shadow: 0 0 0 4px rgba(255,255,255,0.06);
+.ts3Btn:hover{
+    transform:scale(1.05);
 }
 
 /* ===== Layout ===== */
 .container{
-    max-width:1200px;
+    max-width:1100px;
     margin:auto;
-    padding:34px 18px 70px;
-}
-
-.section-title{
-    font-size:24px;
-    color:var(--white);
-    font-weight:800;
-    margin:34px 0 16px;
-    border-left:6px solid rgba(255,255,255,0.30);
-    padding-left:14px;
-    letter-spacing:0.3px;
+    padding:20px;
 }
 
 .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
-    gap:22px;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
 }
 
-/* ===== Card ===== */
 .card{
-    background:linear-gradient(180deg, #161616 0%, #101010 100%);
-    padding:18px;
-    border-radius:18px;
-    box-shadow:0 10px 26px rgba(0,0,0,0.55);
-    border:1px solid rgba(255,255,255,0.08);
-    transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease;
-    position:relative;
-    overflow:hidden;
+    background:#111;
+    padding:15px;
+    border-radius:15px;
 }
-
-.card:hover{
-    transform:translateY(-10px);
-    box-shadow:0 18px 45px rgba(0,0,0,0.75);
-    border-color: rgba(255,255,255,0.18);
-}
-
-.card::before{
-    content:"";
-    position:absolute; inset:0;
-    background: radial-gradient(500px 220px at 20% 0%, rgba(255,255,255,0.06), transparent 55%);
-    opacity:0;
-    transition:opacity .28s ease;
-    pointer-events:none;
-}
-.card:hover::before{opacity:1;}
 
 .card img{
     width:100%;
     height:180px;
     object-fit:cover;
-    border-radius:14px;
-    margin-bottom:14px;
-    border:1px solid rgba(255,255,255,0.08);
-    transition:transform .28s ease, filter .28s ease;
-    filter: contrast(1.02) saturate(0.95);
-}
-.card:hover img{
-    transform:scale(1.04);
-    filter: contrast(1.06) saturate(1.0);
+    border-radius:10px;
 }
 
-.name{
-    font-size:19px;
-    font-weight:800;
-    margin-bottom:6px;
-    color:var(--white);
-}
-.role{
-    font-size:14px;
-    color:rgba(255,255,255,0.68);
-    margin-bottom:14px;
-}
+.name{font-weight:bold;margin-top:10px;}
+.role{color:#aaa;font-size:14px;margin-bottom:10px;}
 
-/* ===== Button (Black/White) ===== */
 .fbBtn{
-    background:#0f0f0f;
-    color:var(--white);
-    border:1px solid rgba(255,255,255,0.18);
-    padding:12px 14px;
-    font-size:15px;
-    font-weight:700;
+    display:block;
+    text-align:center;
+    padding:10px;
     border-radius:999px;
-    cursor:pointer;
-    width:100%;
-    transition:all .25s ease;
+    background:#222;
+    color:#fff;
     text-decoration:none;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    box-shadow:0 10px 22px rgba(0,0,0,0.55);
-    position:relative;
-    overflow:hidden;
 }
 
-.fbBtn::before{
-    content:"";
-    position:absolute;
-    top:0; left:-120%;
-    width:120%;
-    height:100%;
-    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
-    transition:0.55s;
+.toast{
+    position:fixed;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%) translateY(20px);
+    background:rgba(0,0,0,0.9);
+    color:#fff;
+    padding:12px 20px;
+    border-radius:12px;
+    font-weight:600;
+    opacity:0;
+    pointer-events:none;
+    transition:all .3s ease;
+    box-shadow:0 10px 30px rgba(0,0,0,0.6);
 }
-.fbBtn:hover{
-    transform:translateY(-2px);
-    border-color: rgba(255,255,255,0.32);
-    box-shadow:0 18px 35px rgba(0,0,0,0.75);
-}
-.fbBtn:hover::before{ left:120%; }
-.fbBtn i{ font-size:18px; }
 
-/* ===== Pagination ===== */
+.toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+}
+
+/* pagination */
 .pagination{
-    margin-top:26px;
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    flex-wrap:wrap;
+    margin-top:20px;
+    text-align:center;
 }
 
 .pageBtn{
-    background:#0f0f0f;
-    border:1px solid rgba(255,255,255,0.18);
-    color:var(--white);
-    padding:10px 14px;
-    font-size:14px;
-    border-radius:10px;
+    margin:5px;
+    padding:8px 12px;
+    background:#111;
+    border:1px solid #333;
+    color:#fff;
     cursor:pointer;
-    min-width:44px;
-    transition:all .22s ease;
-}
-.pageBtn:hover{
-    border-color: rgba(255,255,255,0.35);
-    transform:translateY(-1px);
-}
-.pageBtn.active{
-    background:var(--white);
-    color:#000;
-    border-color: var(--white);
 }
 
-/* ลด motion สำหรับคนที่ปิด animation */
-@media (prefers-reduced-motion: reduce){
-    *{ animation:none !important; transition:none !important; }
+.pageBtn.active{
+    background:#fff;
+    color:#000;
 }
 </style>
 </head>
+
 <body>
 
-<!-- Splash (โชว์ 3 วิ) -->
-<div id="splash" aria-hidden="true">
-    <div class="splash-ring"></div>
-    <div class="splash-shine"></div>
-    <div class="splash-wrap">
-        <img class="splash-logo" src="https://img2.pic.in.th/1aea5abb6c06b72e1.png" alt="179 Logo">
-        <div class="splash-text">179</div>
-    </div>
+
+<div id="toast" class="toast">คัดลอกแล้ว</div>
+<!-- Splash -->
+<div id="splash">
+    <img src="https://img2.pic.in.th/1aea5abb6c06b72e1.png" class="splash-logo">
 </div>
 
 <header>
-    <div class="header-left">
-        <img src="https://img2.pic.in.th/1aea5abb6c06b72e1.png" alt="179 Logo" class="logo">
-        <h1>179</h1>
-    </div>
-    <div class="controls">
-        <input type="text" id="search" placeholder="ค้นหาสมาชิก...">
-    </div>
+    <h1>179</h1>
 </header>
 
-<div class="container">
-    <div class="section-title">Founders</div>
-    <div id="founder" class="grid"></div>
-    <div id="pagFounder" class="pagination"></div>
+<!-- ปุ่ม TS3 -->
+<button class="ts3Btn" onclick="copyTS3()">
+    <i class="fas fa-copy"></i> คัดลอก IP TS3
+</button>
 
-    <div class="section-title">Members</div>
-    <div id="member" class="grid"></div>
-    <div id="pagMember" class="pagination"></div>
+<script>
+function copyTS3(){
+    const text = "179Gmr";
+
+    navigator.clipboard.writeText(text).catch(()=>{
+        const input = document.createElement("input");
+        input.value = text;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand("copy");
+        document.removeChild(input);
+    });
+
+    const toast = document.getElementById("toast");
+    toast.innerText = "คัดลอกแล้ว: " + text;
+
+    toast.classList.add("show");
+
+    setTimeout(()=>{
+        toast.classList.remove("show");
+    },2000);
+}
+</script>
+<div class="container">
+
+<h2>Founders</h2>
+<div id="founder" class="grid"></div>
+<div id="pagFounder" class="pagination"></div>
+
+<h2>Members</h2>
+<div id="member" class="grid"></div>
+<div id="pagMember" class="pagination"></div>
+
 </div>
 
 <script>
-/* ====== Splash 3 วิ แล้วค่อยโชว์เว็บ ====== */
-(function(){
+/* 🔥 Splash แก้กดไม่ได้ */
+setTimeout(()=>{
     const splash = document.getElementById("splash");
-    // ถ้าอยากให้ “ครบ 3 วิเป๊ะ” ใช้ 3000
-    setTimeout(()=>{
-        splash.classList.add("fade-out");
-        setTimeout(()=> splash.remove(), 600);
-    }, 3000);
-})();
+    splash.classList.add("fade-out");
 
-/* ====== Data ====== */
+    setTimeout(()=>{
+        splash.remove(); // 🔥 เอาออกจริงๆ
+    },500);
+
+},2000);
+
 const allMembers = [
   {name:'Zeno Gumarun',role:'Founder',img:'https://i.postimg.cc/sXC5TDNS/281010419-111440861565383-1295873477742202255-n.jpg',fb:'https://www.facebook.com/'},
   {name:'BungJoke Lonthangkhana',role:'Founder',img:'https://i.postimg.cc/1RY9PF3Z/482010978-517799924738250-5608356900494938275-n.png',fb:'https://www.facebook.com/bang.c.kh.ku.ma.ran'},
   {name:'Mind Gumarun',role:'Founder',img:'https://i.postimg.cc/Bb8tsBWZ/476345984-546276861798001-2605718371620205500-n.png',fb:'https://www.facebook.com/anakin.Rhnk'},
   {name:'Kapo Gumarun',role:'Member',img:'https://i.postimg.cc/gcgmHTXr/481893759-122271886346001818-7950197713354393065-n.png',fb:'https://www.facebook.com/kapo.gumarun'},
-  {name:'Nayx Lonthangkhana ',role:'Member',img:'https://i.postimg.cc/gj5GGx88/468977811-122188227656241663-5795268461173550526-n.png',fb:'https://www.facebook.com/profile.php?id=61557249911802'},
-  {name:'Witta Rakkaimaipen ',role:'Member',img:'https://i.postimg.cc/k4dKw5Hf/483918166-122202900782188960-1045919471961663067-n.png',fb:'https://www.facebook.com/profile.php?id=61555668812380'},
+  {name:'Nayx Lonthangkhana',role:'Member',img:'https://i.postimg.cc/gj5GGx88/468977811-122188227656241663-5795268461173550526-n.png',fb:'https://www.facebook.com/profile.php?id=61557249911802'},
+  {name:'Witta Rakkaimaipen',role:'Member',img:'https://i.postimg.cc/k4dKw5Hf/483918166-122202900782188960-1045919471961663067-n.png',fb:'https://www.facebook.com/profile.php?id=61555668812380'},
   {name:'Ryan Gumarun',role:'Member',img:'https://i.postimg.cc/CLz23F7J/553179905-2871262436396827-8916579718733061737-n.jpg',fb:'https://www.facebook.com/profile.php?id=61581903673434'},
   {name:'Shimo Gumarun',role:'Member',img:'https://i.postimg.cc/fTfqX1kp/image.png',fb:'https://www.facebook.com/profile.php?id=61573758217528'},
   {name:'Hades Gumarun',role:'Member',img:'https://i.postimg.cc/j5cz3bPz/440383557-122102417222310243-6728030251805127040-n.png',fb:'https://www.facebook.com/profile.php?id=61558092953455'}
 ];
 
-const PER_PAGE = 6;
+const PER_PAGE = 4;
 
-function renderGroup(role, boxId, pagId){
+function render(role, boxId, pagId){
     const box = document.getElementById(boxId);
     const pag = document.getElementById(pagId);
-    box.innerHTML = "";
-    pag.innerHTML = "";
 
-    const search = (document.getElementById("search").value || "").toLowerCase();
-    const data = allMembers.filter(m => m.role === role && m.name.toLowerCase().includes(search));
-
+    const data = allMembers.filter(x=>x.role===role);
     const total = Math.ceil(data.length / PER_PAGE);
 
-    if(total === 0){
-        box.innerHTML = "<p style='grid-column:1/-1;text-align:center;color:rgba(255,255,255,0.55);padding:18px 0;'>ไม่พบข้อมูล</p>";
-        return;
-    }
+    let page = window["p_"+role] || 1;
 
-    let page = window[`page_${role}`] || 1;
-    if(page > total) page = total;
-    window[`page_${role}`] = page;
+    const start = (page-1)*PER_PAGE;
+    const list = data.slice(start,start+PER_PAGE);
 
-    const start = (page-1) * PER_PAGE;
-    const list = data.slice(start, start + PER_PAGE);
-
-    list.forEach(x=>{
-        box.innerHTML += `
+    box.innerHTML = list.map(x=>`
         <div class="card">
-            <img src="${x.img}" alt="${x.name}">
+            <img src="${x.img}">
             <div class="name">${x.name}</div>
-            <div class="role">${x.role === 'Founder' ? 'ผู้ก่อตั้ง' : 'สมาชิก'}</div>
-            <a href="${x.fb}" target="_blank" class="fbBtn" rel="noopener">
-                <i class="fab fa-facebook-f"></i>Facebook
-            </a>
-        </div>`;
-    });
+            <div class="role">${x.role}</div>
+            <a href="${x.fb}" target="_blank" class="fbBtn">Facebook</a>
+        </div>
+    `).join("");
 
+    pag.innerHTML="";
     for(let i=1;i<=total;i++){
-        pag.innerHTML += `<button class="pageBtn ${i===page?'active':''}" onclick="gotoPage('${role}',${i})">${i}</button>`;
+        pag.innerHTML += `<button class="pageBtn ${i===page?'active':''}" onclick="go('${role}',${i})">${i}</button>`;
     }
 }
 
-function gotoPage(role, p){
-    window[`page_${role}`] = p;
+function go(role,p){
+    window["p_"+role]=p;
     renderAll();
 }
 
 function renderAll(){
-    renderGroup("Founder","founder","pagFounder");
-    renderGroup("Member","member","pagMember");
+    render("Founder","founder","pagFounder");
+    render("Member","member","pagMember");
 }
-
-document.getElementById("search").addEventListener("input", ()=>{
-    window.page_Founder = 1;
-    window.page_Member = 1;
-    renderAll();
-});
 
 renderAll();
 </script>
